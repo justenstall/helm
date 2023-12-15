@@ -24,7 +24,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/moby/term"
 	"github.com/spf13/cobra"
 
 	"helm.sh/helm/v3/cmd/helm/require"
@@ -128,15 +127,15 @@ func getUsernamePassword(usernameOpt string, passwordOpt string, passwordFromStd
 // Copied/adapted from https://github.com/oras-project/oras
 func readLine(prompt string, silent bool) (string, error) {
 	fmt.Print(prompt)
-	if silent {
-		fd := os.Stdin.Fd()
-		state, err := term.SaveState(fd)
-		if err != nil {
-			return "", err
-		}
-		term.DisableEcho(fd, state)
-		defer term.RestoreTerminal(fd, state)
-	}
+	// if silent {
+	// 	fd := os.Stdin.Fd()
+	// 	state, err := term.SaveState(fd)
+	// 	if err != nil {
+	// 		return "", err
+	// 	}
+	// 	term.DisableEcho(fd, state)
+	// 	defer term.RestoreTerminal(fd, state)
+	// }
 
 	reader := bufio.NewReader(os.Stdin)
 	line, _, err := reader.ReadLine()
